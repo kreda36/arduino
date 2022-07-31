@@ -1,0 +1,71 @@
+const int pin = 2;
+const int pin2 = 3;
+const int pin3 = 4;
+const int led = 13;
+int btn_przer = HIGH;
+int btn_state;
+int btn_przer2 = LOW;
+int btn_state2;
+byte liczba = 0;
+int zero = LOW;
+int stopp = HIGH;
+int wyjs =HIGH;
+int wyjs2 =HIGH;
+void setup() {
+  Serial.begin(9600);
+  pinMode(pin, INPUT);
+  pinMode(pin2, INPUT);
+  pinMode(led, OUTPUT);
+}
+
+void loop() {
+
+  btn_state = digitalRead(pin);
+  if ( (btn_state == LOW) && (btn_przer == HIGH) && (stopp == HIGH)&& (wyjs2 == HIGH))
+  {
+    liczba++;
+    Serial.println(liczba);
+    zero = HIGH;
+    wyjs=LOW;
+    delay(100);
+  }
+btn_przer = btn_state;
+
+  btn_state2 = digitalRead(pin2);
+  if ( (btn_state2 == LOW) && (btn_przer2 == HIGH) && (zero == HIGH)&& (wyjs == HIGH))
+  {
+    liczba = liczba - 1;
+    stopp = HIGH;
+    digitalWrite (led, LOW);
+    wyjs2=LOW;
+    Serial.println(liczba);
+    delay(100);
+  }
+
+    if (btn_state2 == LOW)
+  {
+   wyjs=HIGH;
+   delay(100);
+    
+  }
+      if (btn_state == LOW)
+  {
+   wyjs2=HIGH;
+   delay(100);
+    
+  }
+
+  btn_przer2 = btn_state2;
+  if ( liczba > 4)
+  {
+    stopp = LOW;
+    digitalWrite (led, HIGH);
+    Serial.println("STOP");
+  }
+
+  if ( liczba < 1)
+  {
+    zero = LOW;
+  }
+
+}
