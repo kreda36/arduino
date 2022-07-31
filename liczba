@@ -1,7 +1,6 @@
 const int pin = 2;
 const int pin2 = 3;
-const int pin3 = 4;
-const int led = 13;
+const int led = 5;
 int btn_przer = HIGH;
 int btn_state;
 int btn_przer2 = LOW;
@@ -13,8 +12,8 @@ int wyjs =HIGH;
 int wyjs2 =HIGH;
 void setup() {
   Serial.begin(9600);
-  pinMode(pin, INPUT);
-  pinMode(pin2, INPUT);
+  pinMode(pin, INPUT_PULLUP);
+  pinMode(pin2, INPUT_PULLUP);
   pinMode(led, OUTPUT);
 }
 
